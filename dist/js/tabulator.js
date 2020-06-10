@@ -14054,12 +14054,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 					}
 				}
 
-				if (cell.column.cellEvents.cellEditing) {
-					cell.column.cellEvents.cellEditing.call(this.table, component);
-				}
-
-				self.table.options.cellEditing.call(this.table, component);
-
 				params = typeof cell.column.modules.edit.params === "function" ? cell.column.modules.edit.params(component) : cell.column.modules.edit.params;
 
 				cellEditor = cell.column.modules.edit.editor.call(self, component, onRendered, success, cancel, params);
@@ -14085,6 +14079,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 								e.stopPropagation();
 							});
 						}
+
+						if (cell.column.cellEvents.cellEditing) {
+							cell.column.cellEvents.cellEditing.call(this.table, component);
+						}
+
+						self.table.options.cellEditing.call(this.table, component);
+
 					} else {
 						console.warn("Edit Error - Editor should return an instance of Node, the editor returned:", cellEditor);
 						element.blur();
